@@ -1,0 +1,51 @@
+/** Breakpoints **/
+
+// Small tablets and large smartphones (landscape view)
+$screen-mob-tab-min: 576px;
+// Small tablets (portrait view)
+$screen-tab-desktop-min: 768px;
+// Tablets and small desktops
+$screen-desktop-min: 992px;
+// Large tablets and desktops
+$screen-xl-desktop-min: 1200px;
+
+@mixin breakpoint-mob-tab {
+  @media (min-width: #{screen-mob-tab-min}) {
+      @content;
+  }
+}
+
+@mixin breakpoint-tab-desktop {
+  @media (min-width: #{$screen-tab-desktop-min}) {
+      @content;
+  }
+}
+
+@mixin breakpoint-desktop {
+  @media (min-width: #{$screen-desktop-min}) {
+      @content;
+  }
+}
+
+@mixin breakpoint-xl-desktop {
+  @media (min-width: #{$screen-xl-desktop-min}) {
+      @content;
+  }
+}
+
+/** Utils **/
+@mixin gutters {
+  padding-inline: var(--gutters-padding, 30px);
+
+  @include breakpoint-tab-desktop {
+    --gutters-padding: 60px;
+  }
+
+  @include breakpoint-desktop {
+    --gutters-padding: 90px;
+  }
+
+  @include breakpoint-xl-desktop {
+    --gutters-padding: 132px;
+  }
+}
