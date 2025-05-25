@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import "./globals.scss";
 
 import styles from './layout.module.scss';
+import { Nav } from '@/components/Nav/Nav'
 
 // Just using 1 font for now
 const norms = localFont({
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="en" className={norms.className}>
       <body>
         <div className={styles.container}>
+          <Nav />
           {children}
         </div>
       </body>
