@@ -1,16 +1,15 @@
+import localFont from 'next/font/local'
+
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.scss";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
+import styles from './layout.module.scss';
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+// Just using 1 font for now
+const norms = localFont({
+  src: '../public/fonts/TTNorms-Medium.otf',
+  variable: '--font-norms'
+})
 
 export const metadata: Metadata = {
   title: {
@@ -26,9 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={norms.className}>
       <body>
-        {children}
+        <div className={styles.container}>
+          {children}
+        </div>
       </body>
     </html>
   );
