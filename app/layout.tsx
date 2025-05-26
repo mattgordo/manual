@@ -5,6 +5,7 @@ import "./globals.scss";
 
 import styles from './layout.module.scss';
 import { Nav } from '@/components/Nav/Nav'
+import { QuizProvider } from '@/contexts/QuizContext';
 
 // Just using 1 font for now
 const norms = localFont({
@@ -28,10 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={norms.className}>
       <body>
-        <div className={styles.container}>
-          <Nav />
-          {children}
-        </div>
+        <QuizProvider>
+          <div className={styles.container}>
+            <Nav />
+            {children}
+          </div>
+        </QuizProvider>
       </body>
     </html>
   );
