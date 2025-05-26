@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   },
   sassOptions: {
     prependData: `@import "./styles/mixins.scss";`,
+    quietDeps: true
   }
 };
 
