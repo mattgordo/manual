@@ -2,9 +2,10 @@
 
 import React from "react";
 
-import styles from './Hero.module.scss'
 import { useQuiz } from "@/contexts/QuizContext";
 import { hasStartedQuiz } from "../Quiz/Quiz.helpers";
+
+import styles from './Hero.module.scss';
 
 export const Hero = () => {
   const { setShowQuiz } = useQuiz();

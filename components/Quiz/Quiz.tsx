@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { QUIZ_ANSWERS_KEY, useQuiz } from "@/contexts/QuizContext";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 
-import styles from './Quiz.module.scss'
+import styles from './Quiz.module.scss';
 
 export const Quiz = () => {
   const { setShowQuiz } = useQuiz();
@@ -19,6 +19,6 @@ export const Quiz = () => {
   }
   
   return <div className={styles.quiz}>
-    <button role="button" className={styles.exitButton} onClick={exitQuiz}>Exit quiz</button>
+    <button role="button" className={styles.exitButton} onClick={exitQuiz}>Exit Quiz</button>
   </div>
 }
