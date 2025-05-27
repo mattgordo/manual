@@ -9,19 +9,20 @@ import styles from './Quiz.module.scss';
 import { getAnswers } from "./Quiz.helpers";
 
 export type QuizQuestionProps = {
+  question: any,
   currentQuestion: number;
   setCurrentQuestion: Dispatch<SetStateAction<number>>;
 }
 
 export const QuizQuestion = ({ currentQuestion, setCurrentQuestion }: QuizQuestionProps) => {
-  const { setItem: setToken}  = useLocalStorage<number[]>(QUIZ_ANSWERS_KEY);
+  const { setItem: setAnswers}  = useLocalStorage<number[]>(QUIZ_ANSWERS_KEY);
 
   const answers = getAnswers();
 
   const playQuiz = () => {
     answers?.push(14)
-    setToken(answers)
-    setCurrentQuestion(currentQuestion+1)
+    setAnswers(answers)
+    setCurrentQuestion(currentQuestion + 1)
   }
   
   return <div className={styles.quizQuestion} data-question={currentQuestion}>
