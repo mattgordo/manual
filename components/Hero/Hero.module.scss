@@ -44,6 +44,14 @@
       border: none;
       background-color: var(--deep-red);
       color: white;
+
+      @include breakpoint-desktop {
+        transition: background-color 0.3ms ease-in;
+
+        &:hover {
+          background-color: color.scale($deep-red, $lightness: 10%);
+        }
+      }
     }
   }
 }

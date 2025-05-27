@@ -1,10 +1,10 @@
 import { isCSR } from "./helpers";
 
-export type TUseLocalStorage<T> = [
-  () => T | undefined,
-  (value: T) => void,
-  () => void
-];
+export type TUseLocalStorage<T> = {
+  getItem: () => T | undefined;
+  setItem: (value: T) => void;
+  removeItem: () => void;
+};
 
 /**
  * @author Serif Colakel - https://dev.to/serifcolakel/simplify-local-storage-management-in-react-with-the-uselocalstorage-hook-4eh7
@@ -42,7 +42,7 @@ export function useLocalStorage<T>(key: string): TUseLocalStorage<T> {
         item = window.localStorage.getItem(key);
       }
 
-      if (item === null) return undefined;
+      if (!item) return undefined;
 
       return JSON.parse(item);
     } catch (error) {
@@ -64,5 +64,5 @@ export function useLocalStorage<T>(key: string): TUseLocalStorage<T> {
     }
   };
 
-  return [getItem, setItem, removeItem];
+  return { getItem, setItem, removeItem };
 }

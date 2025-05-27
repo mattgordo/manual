@@ -7,15 +7,15 @@ export const QUIZ_ANSWERS_KEY = 'quiz_answers';
 
 export type QuizProviderType = {
   questions: {};
-  answers: number[];
+  // answers: number[];
   showQuiz: boolean;
-  setAnswers?: Dispatch<SetStateAction<QuizProviderType['answers']>>;
+  // setAnswers?: Dispatch<SetStateAction<QuizProviderType['answers']>>;
   setShowQuiz?: Dispatch<SetStateAction<QuizProviderType['showQuiz']>>;
 }
 
 const QuiztProviderState: QuizProviderType = {
   questions: {},
-  answers: [],
+  // answers: [],
   showQuiz: false,
 }
 
@@ -26,16 +26,27 @@ const QuizContext = createContext(QuiztProviderState);
 
 // Create a provider component
 export const QuizProvider = ({ children }: { children: React.ReactNode}) => {
-  const [getToken] = useLocalStorage<number[]>(QUIZ_ANSWERS_KEY);
-  const localAnswers = getToken() ?? [];
+  // const [getToken] = useLocalStorage<number[]>(QUIZ_ANSWERS_KEY);
+  // const localAnswers = getToken() ?? [];
 
   const [showQuiz, setShowQuiz] = useState(false);
-  const [answers, setAnswers] = useState<number[]>(localAnswers);
+  // const [answers, setAnswers] = useState<number[]>();
 
   const questions = {};
 
+  // remove answers and questions
+  const value = useMemo(() => { 
+    return { 
+      showQuiz, 
+      setShowQuiz, 
+      // answers, 
+      // setAnswers,
+      questions 
+    }}, [ showQuiz, setShowQuiz]
+  );
+
   return (
-    <QuizContext.Provider value={{ showQuiz, setShowQuiz, answers, setAnswers, questions }}>
+    <QuizContext.Provider value={{ ...value }}>
       {children}
     </QuizContext.Provider>
   );
