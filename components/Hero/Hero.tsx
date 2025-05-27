@@ -3,13 +3,14 @@
 import React from "react";
 
 import styles from './Hero.module.scss'
-import { useQuiz } from "@/contexts/QuizContext";
+import { QUIZ_ANSWERS_KEY, useQuiz } from "@/contexts/QuizContext";
+import { useLocalStorage } from "@/utils/useLocalStorage";
 
 export const Hero = () => {
   const { setShowQuiz } = useQuiz();
 
   const playQuiz = () => {
-    setShowQuiz?.(true)
+    setShowQuiz?.(true);
   }
 
   return <section className={styles.hero}>

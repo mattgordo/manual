@@ -1,17 +1,22 @@
 "use client"
 
-import React, { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
+import { isCSR } from "@/utils/helpers";
+import { useLocalStorage } from "@/utils/useLocalStorage";
+import React, { createContext, Dispatch, SetStateAction, useContext, useMemo, useState } from "react";
+
+export const QUIZ_ANSWERS_KEY = 'quiz_answers';
 
 export type QuizProviderType = {
   questions?: {};
-  answers?: {}
+  answers?: number[];
   showQuiz: boolean;
+  setAnswers?: Dispatch<SetStateAction<QuizProviderType['answers']>>;
   setShowQuiz?: Dispatch<SetStateAction<QuizProviderType['showQuiz']>>;
 }
 
 const QuiztProviderState: QuizProviderType = {
   questions: {},
-  answers: {},
+  answers: [],
   showQuiz: false,
 }
 
@@ -22,15 +27,16 @@ const QuizContext = createContext(QuiztProviderState);
 
 // Create a provider component
 export const QuizProvider = ({ children }: { children: React.ReactNode}) => {
-  const [showQuiz, setShowQuiz] = useState(false); // default theme
+  const [getToken] = useLocalStorage<number[]>(QUIZ_ANSWERS_KEY);
 
-  // Toggle theme between 'light' and 'dark'
-  // const toggleTheme = () => {
-  //   setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-  // };
+  const localAnswers = getToken();
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [answers, setAnswers] = useState(localAnswers);
+
+  const questions = {};
 
   return (
-    <QuizContext.Provider value={{ showQuiz, setShowQuiz }}>
+    <QuizContext.Provider value={{ showQuiz, setShowQuiz, answers, setAnswers, questions }}>
       {children}
     </QuizContext.Provider>
   );
