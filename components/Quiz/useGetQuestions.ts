@@ -6,7 +6,7 @@ export type Questions = {
     display: string,
     value: boolean,
     isRejection: boolean
-  }
+  }[]
 }
 
 export const useGetQuestions = () => {
