@@ -4,7 +4,7 @@ export type Questions = {
   question: string,
   options: {
     display: string,
-    value: boolean,
+    value: boolean | string,
     isRejection: boolean
   }[]
 }
@@ -12,6 +12,8 @@ export type Questions = {
 export const useGetQuestions = () => {
   const [questions, setQuestions] = useState<Questions[]>([]);
 
+  // Was getting CORS errors using https://manual-case-study.herokuapp.com/questionnaires/972423.json 
+  // so created my own API endpoint
   const url = '/api/questions';
 
   const getQuestions = async () => {

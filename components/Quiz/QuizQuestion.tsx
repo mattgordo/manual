@@ -5,7 +5,7 @@ import parse from 'html-react-parser';
 import { QUIZ_ANSWERS_KEY } from "@/contexts/QuizContext";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 
-import { getAnswers } from "./Quiz.helpers";
+import { getAnswers, hasImageAsValue } from "./Quiz.helpers";
 import { Questions } from "./useGetQuestions";
 
 import styles from './QuizQuestion.module.scss';
@@ -16,11 +16,8 @@ export type QuizQuestionProps = {
   setCurrentQuestion: Dispatch<SetStateAction<number>>;
 }
 
-// Get value of alt attribute in HTML string
-const regexMatch = /(?<=alt=")(.*?)(?=")/;
-
 export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: QuizQuestionProps) => {
-  const { setItem: setAnswers}  = useLocalStorage<string[]>(QUIZ_ANSWERS_KEY);
+  const { setItem: setAnswers}  = useLocalStorage<(string | boolean)[]>(QUIZ_ANSWERS_KEY);
 
   const { question: questionText, options } = question ?? {};
 
@@ -31,7 +28,17 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
     const label = e?.currentTarget;
     const input = label.querySelector('input');
 
-    answers[currentQuestion] = input ? input?.value : '';
+    switch (true) {
+      case input?.value === 'true':
+        answers[currentQuestion] = true;
+        break;
+      case input?.value === 'false':
+        answers[currentQuestion] = false;
+        break;
+      default:
+        answers[currentQuestion] = input?.value ?? '';
+    }
+
     setAnswers(answers);
     setCurrentQuestion((currentQuestion) => currentQuestion + 1);
   }
@@ -39,32 +46,33 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
   return <div className={styles.quizQuestion} data-question={currentQuestion + 1}>
     <p>{questionText}</p>
     <ul className={styles.questions}>
-      {options.map(({display}, index) => {
+      {options.map(({display, value}, index) => {
+
         // A simple check to see if the response has an alt tag
         // to determine if response returns an image and not string
-        const hasImage = display.match(regexMatch);
-        const label = hasImage ? hasImage[0] : display;
+        const hasImage = hasImageAsValue(display);
+        // const label = hasImage ? hasImage[0] : display;
 
         // If the display value is an HTML in a string,
         // we need to parse it back to HTML to render
         const radioInput = hasImage
           ? <div className={styles.inputLabelImage}>
               {parse(display)}
-              <span>{label}</span>
+              <span>{value}</span>
             </div>
           : <div className={styles.inputLabel}>
-              {label}
+              {display}
             </div>
 
-        const isSelected = answers[currentQuestion] === label;
+        const isSelected = answers[currentQuestion] === value;
 
-        return <li key={index}>
+        return <li key={index} className={styles.question}>
           <label htmlFor={String(index)} className={styles.questionLabel} onClick={selectAnswer} data-selected={isSelected}>
             <input
               className={styles.questionInput}
               type="radio"
-              name={label ?? display}
-              value={label ?? display}
+              name={hasImage?.[0] ?? display}
+              value={String(value)}
               defaultChecked={isSelected}
             />
             {radioInput}
@@ -72,6 +80,14 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
         </li>
       })}
     </ul>
-    <button role="button" className={styles.quizButton} onClick={() => setCurrentQuestion((currentQuestion) => currentQuestion - 1)}>Previous</button>
+
+    {currentQuestion !== 0
+      ? <button
+          role="button"
+          className={styles.quizButton}
+          onClick={() => setCurrentQuestion((currentQuestion) => currentQuestion - 1)}>
+            Previous
+        </button>
+      : null}
   </div>
 }
