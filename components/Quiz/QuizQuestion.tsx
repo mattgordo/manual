@@ -40,20 +40,33 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
     <p>{questionText}</p>
     <ul className={styles.questions}>
       {options.map(({display}, index) => {
-        const label = display.match(regexMatch)?.[0];
+        // A simple check to see if the response has an alt tag
+        // to determine if response returns an image and not string
+        const hasImage = display.match(regexMatch);
+        const label = hasImage ? hasImage[0] : display;
 
-        const radioInput = label
+        // If the display value is an HTML in a string,
+        // we need to parse it back to HTML to render
+        const radioInput = hasImage
           ? <div className={styles.inputLabelImage}>
               {parse(display)}
               <span>{label}</span>
             </div>
           : <div className={styles.inputLabel}>
-              {display}
+              {label}
             </div>
 
+        const isSelected = answers[currentQuestion] === label;
+
         return <li key={index}>
-          <label htmlFor={String(index)} className={styles.questionLabel} onClick={selectAnswer}>
-            <input className={styles.questionInput} type="radio" name={label ?? display} value={label ?? display} />
+          <label htmlFor={String(index)} className={styles.questionLabel} onClick={selectAnswer} data-selected={isSelected}>
+            <input
+              className={styles.questionInput}
+              type="radio"
+              name={label ?? display}
+              value={label ?? display}
+              defaultChecked={isSelected}
+            />
             {radioInput}
           </label>
         </li>

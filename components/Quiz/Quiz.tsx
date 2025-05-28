@@ -25,14 +25,7 @@ export const Quiz = () => {
     setToken([]);
   }, []);
 
-  // console.log('answers', answers?.length)
-  // console.log('questions', questions?.length)
-
-
   const hasFinishedQuiz = answers?.length >= questions?.length;
-
-  // console.log('hasFinishedQuiz', hasFinishedQuiz)
-  // console.log('currentQuestion', currentQuestion)
 
   const exitQuiz = () => {
     setShowQuiz?.(false);
