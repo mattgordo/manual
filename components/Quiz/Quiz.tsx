@@ -13,23 +13,26 @@ import { useGetQuestions } from "./useGetQuestions";
 
 export const Quiz = () => {
   const { setShowQuiz } = useQuiz();
-  const { setItem: setToken} = useLocalStorage<number[]>(QUIZ_ANSWERS_KEY);
+  const { setItem: setToken } = useLocalStorage<string[]>(QUIZ_ANSWERS_KEY);
   const questions = useGetQuestions();
 
   const answers = getAnswers();
 
-  console.log('questions', questions.length)
+  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
 
-  // Set localStorage if it does not exist already
+  // Set localStorage and reset answers on mount
   useEffect(() => {
-    if (answers.length === 0) {
-      setToken([]);
-    }
+    setToken([]);
   }, []);
 
-  const [currentQuestion, setCurrentQuestion] = useState<number>(answers?.length);
+  // console.log('answers', answers?.length)
+  // console.log('questions', questions?.length)
 
-  const hasFinishedQuiz = answers?.length === questions?.length;
+
+  const hasFinishedQuiz = answers?.length >= questions?.length;
+
+  // console.log('hasFinishedQuiz', hasFinishedQuiz)
+  // console.log('currentQuestion', currentQuestion)
 
   const exitQuiz = () => {
     setShowQuiz?.(false);

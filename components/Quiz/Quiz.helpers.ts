@@ -4,7 +4,7 @@ import { QUIZ_ANSWERS_KEY } from "@/contexts/QuizContext"
 import { useLocalStorage } from "@/utils/useLocalStorage"
 
 export const getAnswers = () => {
-  const { getItem: getToken } = useLocalStorage<number[]>(QUIZ_ANSWERS_KEY);
+  const { getItem: getToken } = useLocalStorage<string[]>(QUIZ_ANSWERS_KEY);
 
   const answers = getToken() ?? [];
 

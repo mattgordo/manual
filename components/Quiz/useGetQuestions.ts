@@ -23,7 +23,6 @@ export const useGetQuestions = () => {
       }
 
       const data = await response.json();
-      console.log(data)
       setQuestions(data);
     } catch (error) {
       console.error(error);
