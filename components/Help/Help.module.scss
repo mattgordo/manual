@@ -1,0 +1,107 @@
+.help {
+  @include gutters;
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 35px;
+
+  .title {
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+  }
+
+  @include breakpoint-desktop {
+    padding-top: 70px;
+
+    .title {
+      text-align: center;
+      font-size: 40px;
+      line-height: 60px;
+    }
+  }
+
+  .treatments {
+    display: flex;
+    flex-direction: column;
+    max-width: 960px;
+    width: 100%;
+
+    .treatment {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 0;
+
+      &[data-treatment="1"] .info {
+        background: url('/number1.jpg') top center no-repeat;
+        background-size: contain;
+      }
+
+      &[data-treatment="2"] {
+        flex-direction: column-reverse;
+
+        .info {
+          background: url('/number2.jpg') top center no-repeat;
+          background-size: contain;
+        }
+      }
+
+      @include breakpoint-tab-desktop {
+        padding: 90px 0;
+        align-items: unset;
+
+        &[data-treatment="1"],
+        &[data-treatment="2"] {
+          flex-direction: row;
+        }
+
+        &[data-treatment="1"] .info {
+          background-position: -60px center;
+          background-size: 400px;
+          justify-content: flex-end;
+        }
+
+        &[data-treatment="2"] .info {
+          background-position: 110px center;
+          background-size: auto;
+        }
+      }
+    }
+
+    .image {
+      max-width: 375px;
+      width: 100%;
+    }
+
+    .info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+
+      .content {
+        padding: 30px;
+        max-width: 360px;
+        width: 100%;
+      }
+
+      .treatmentTitle {
+        font-size: 10px;
+        line-height: 15px;
+      }
+
+      .subtitle {
+        margin-top: 10px;
+        font-size: 28px;
+        line-height: 40px;
+      }
+
+      .description {
+        margin-top: 22px;
+        font-size: 18px;
+        line-height: 30px;
+      }
+    }
+  }
+}

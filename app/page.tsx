@@ -7,6 +7,7 @@ import styles from "./page.module.scss";
 import { Quiz } from "@/components/Quiz/Quiz";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 import { useEffect } from "react";
+import { Help } from "@/components/Help/Help";
 
 export default function Home() {
   const { showQuiz } = useQuiz();
@@ -23,6 +24,7 @@ export default function Home() {
         ? <Quiz />
         : <>
           <Hero />
+          <Help />
         </>}
     </main>
   );

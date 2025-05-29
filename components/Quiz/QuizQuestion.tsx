@@ -93,7 +93,7 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
                 role="button"
                 className={styles.navButton}
                 onClick={() => setCurrentQuestion((currentQuestion) => currentQuestion - 1)}>
-                  <img src="/arrow-left-icon.svg" height="30" width="30" /> Previous
+                  <img src="/arrow-left-icon.svg" height="30" width="30" alt="" /> Previous
               </button>
             : null}
           {typeof answers[currentQuestion] !== 'undefined'
@@ -102,7 +102,7 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
                 role="button"
                 className={styles.navButton}
                 onClick={() => setCurrentQuestion((currentQuestion) => currentQuestion + 1)}>
-                  Next <img src="/arrow-right-icon.svg" height="30" width="30" /> 
+                  Next <img src="/arrow-right-icon.svg" height="30" width="30" alt="" /> 
               </button>
             : null}
         </nav>
