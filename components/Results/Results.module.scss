@@ -8,8 +8,25 @@
   height: 100%;
 
   .text {
-    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
     text-align: center;
-    text-wrap: balance;
+
+    .title {
+      font-weight: 400;
+      font-size: 30px;
+    }
+
+
+    @include breakpoint-desktop {
+      font-size: 30px;
+      text-wrap: balance;
+
+      .title {
+        font-size: 40px;
+      }
+    }
   }
 }
