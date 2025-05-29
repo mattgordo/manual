@@ -1,26 +1,15 @@
-.quiz {
+.results {
   @include gutters;
 
+  margin-bottom: 74px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  
-  .exitButton {
-    cursor: pointer;
-    background-color: white;
-    border: 1px solid var(--deep-red);
-    color: var(--deep-red);
-    padding: 15px 30px;
-    margin: 26px 0 0 auto;
-    z-index: 2;
+  justify-content: center;
+  height: 100%;
 
-    @include breakpoint-desktop {
-      transition: background-color 0.3ms ease-in;
-
-      &:hover {
-        background-color: var(--deep-red);
-        color: white;
-      }
-    }
+  .text {
+    font-size: 30px;
+    text-align: center;
+    text-wrap: balance;
   }
 }
