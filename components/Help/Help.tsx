@@ -1,5 +1,6 @@
 import React from "react";
 
+import Image from "next/image";
 import styles from './Help.module.scss';
 
 export const Help = () => {
@@ -9,7 +10,7 @@ export const Help = () => {
     <div className={styles.treatments}>
       <article className={styles.treatment} data-treatment="1">
         <div className={styles.image}>
-          <img src="/photo1.jpg" loading="lazy" alt="back of man's head with bald patch" width="100%" />
+          <Image src="/photo1.jpg" alt="back of man's head with bald patch" width="370" height="445" />
         </div>
         <div className={styles.info}>
           <div className={styles.content}>
@@ -28,7 +29,7 @@ export const Help = () => {
           </div>
         </div>
         <div className={styles.image}>
-          <img src="/photo2.jpg" loading="lazy" alt="smiling man with beard" width="100%" />
+          <Image src="/photo2.jpg" alt="smiling man with beard" width="370" height="445" />
         </div>
       </article>
     </div>

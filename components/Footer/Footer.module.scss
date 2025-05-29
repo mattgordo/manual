@@ -1,0 +1,108 @@
+.footer {
+  @include gutters;
+
+  background-color: var(--light-green);
+
+  .links {
+    padding: 30px 0 0;
+
+    .homeLink {
+      margin-bottom: 20px;
+    }
+
+    .linksList {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 770px;
+      width: 100%;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 30%;
+    }
+
+    .socialLinks {
+      display: flex;
+      gap: 44px;
+    }
+
+    .socialList {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .listTitle {
+      font-size: 12px;
+      line-height: 15px;
+    }
+
+    .link {
+      font-size: 14px;
+      line-height: 16px;
+      padding: 8px 0;
+
+      a {
+        text-decoration: none;
+      }
+
+      a:active,
+      a:visited {
+        color: var(--dark-green);
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @include breakpoint-tab-desktop {
+      padding: 72px 0;
+      display: flex;
+      justify-content: space-between;
+
+      .linksList {
+        flex-wrap: nowrap;
+      }
+
+      .list,
+      .socialList {
+        width: 25%;
+      }
+
+      .socialList {
+        margin-top: unset;
+      }
+
+      .listTitle {
+        font-size: 10px;
+        line-height: 15px;
+      }
+
+      .link {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .copyright {
+    color: var(--mild-green);
+    font-size: 16px;
+    line-height: 30px;
+    padding: 25px 0;
+    text-align: center;
+
+    @include breakpoint-tab-desktop {
+
+      border-top: 1px solid var(--milder-green);
+    }
+  }
+}

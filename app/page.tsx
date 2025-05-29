@@ -8,6 +8,7 @@ import { Quiz } from "@/components/Quiz/Quiz";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 import { useEffect } from "react";
 import { Help } from "@/components/Help/Help";
+import { Footer } from "@/components/Footer/Footer";
 
 export default function Home() {
   const { showQuiz } = useQuiz();
@@ -25,6 +26,7 @@ export default function Home() {
         : <>
           <Hero />
           <Help />
+          <Footer />
         </>}
     </main>
   );
