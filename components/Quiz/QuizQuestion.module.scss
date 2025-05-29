@@ -2,9 +2,17 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 40px 0;
+  padding: 40px 0 120px;
+  text-align: center;
+
+  .questionTitle {
+    font-size: 20px;
+    text-wrap: balance;
+  }
 
   .questions {
+    margin-top: 50px;
+
     &:has(img) {
       display: grid;
       gap: 12px;
@@ -14,6 +22,33 @@
 
       @include breakpoint-desktop {
         max-width: unset;
+      }
+    }
+
+    &:not(:has(img)) {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+
+      li {
+        width: 100%;
+      }
+    }
+  }
+
+  .inputLabel {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid var(--mid-grey);
+    padding: 10px 20px;
+    max-width: 480px;
+    width: 100%;
+    transition: background-color 0.3ms ease-in;
+
+    @media not all and (hover: none) {
+      &:hover {
+        background-color: var(--light-grey);
       }
     }
   }
@@ -32,6 +67,10 @@
       font-size: 12px;
     }
 
+    &:hover {
+      background-color: var(--light-grey);
+    }
+
     @include breakpoint-desktop {
       max-width: unset;
 
@@ -42,18 +81,22 @@
   }
 
   .questionLabel {
-    border-radius: 20px;
-    cursor: pointer;
-    display: block;
     position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     z-index: 2;
 
     &[data-selected="true"] {
-      box-shadow: 0px 0px 4px 1px var(--dark-green);
-    }
+      .inputLabelImage,
+      .inputLabel {
+        box-shadow: 0px 0px 6px 2px var(--dark-green);
 
-    &:hover {
-      background-color: var(--light-grey);
+        // &:hover {
+        //   background-color: var(--light-grey);
+        // }
+      }
     }
   }
 
@@ -62,5 +105,43 @@
     opacity: 0;
     width: 0;
     height: 0;
+  }
+
+  .questionNav {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    bottom: 0;
+    box-shadow: 0px 0px 6px 2px var(--mid-grey);
+    padding: 20px 30px;
+    width: 100%;
+    z-index: 2;
+
+    &:not(:has([data-id="previous"])) {
+      justify-content: flex-end;
+    }
+
+    .navButton {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      background: white;
+      border: none;
+      padding: 0;
+      font-size: 20px;
+
+      &[data-id="previous"] {
+        img {
+          margin-right: 5px;
+        }
+      }
+
+      &[data-id="next"] {
+        img {
+          margin-left: 5px;
+        }
+      }
+    }
   }
 }

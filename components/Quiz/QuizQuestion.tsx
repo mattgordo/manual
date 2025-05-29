@@ -42,9 +42,12 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
     setAnswers(answers);
     setCurrentQuestion((currentQuestion) => currentQuestion + 1);
   }
+
+  const showNextNav = typeof answers[currentQuestion] !== 'undefined';
+  const showPrevNav = currentQuestion !== 0;
   
   return <div className={styles.quizQuestion} data-question={currentQuestion + 1}>
-    <p>{questionText}</p>
+    <p className={styles.questionTitle}>{questionText}</p>
     <ul className={styles.questions}>
       {options.map(({display, value}, index) => {
 
@@ -67,7 +70,7 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
         const isSelected = answers[currentQuestion] === value;
 
         return <li key={index} className={styles.question}>
-          <label htmlFor={String(index)} className={styles.questionLabel} onClick={selectAnswer} data-selected={isSelected}>
+          <label className={styles.questionLabel} onClick={selectAnswer} data-selected={isSelected}>
             <input
               className={styles.questionInput}
               type="radio"
@@ -81,13 +84,28 @@ export const QuizQuestion = ({ currentQuestion, setCurrentQuestion, question }: 
       })}
     </ul>
 
-    {currentQuestion !== 0
-      ? <button
-          role="button"
-          className={styles.quizButton}
-          onClick={() => setCurrentQuestion((currentQuestion) => currentQuestion - 1)}>
-            Previous
-        </button>
+    
+    {(showNextNav || showPrevNav)
+      ? <nav className={styles.questionNav}>
+          {currentQuestion !== 0
+            ? <button
+                data-id="previous"
+                role="button"
+                className={styles.navButton}
+                onClick={() => setCurrentQuestion((currentQuestion) => currentQuestion - 1)}>
+                  <img src="/arrow-left-icon.svg" height="30" width="30" /> Previous
+              </button>
+            : null}
+          {typeof answers[currentQuestion] !== 'undefined'
+            ? <button
+                data-id="next"
+                role="button"
+                className={styles.navButton}
+                onClick={() => setCurrentQuestion((currentQuestion) => currentQuestion + 1)}>
+                  Next <img src="/arrow-right-icon.svg" height="30" width="30" /> 
+              </button>
+            : null}
+        </nav>
       : null}
   </div>
 }

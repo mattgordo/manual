@@ -24,13 +24,13 @@ export const Quiz = () => {
   }
   
   return <div className={styles.quiz}>
-    <button role="button" className={styles.exitButton} onClick={exitQuiz}>EXIT QUIZ</button>
+    <button role="button" className={styles.exitButton} onClick={exitQuiz}><img height="40" width="40" src="/close-icon.svg" /></button>
     {hasFinishedQuiz 
      ? <Results />
      : <QuizQuestion
-        currentQuestion={currentQuestion}
-        setCurrentQuestion={setCurrentQuestion}
-        question={questions?.[currentQuestion]}
+          currentQuestion={currentQuestion}
+          setCurrentQuestion={setCurrentQuestion}
+          question={questions?.[currentQuestion]}
       />}
   </div>
 }

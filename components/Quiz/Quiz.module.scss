@@ -8,18 +8,21 @@
   .exitButton {
     cursor: pointer;
     background-color: white;
-    border: 1px solid var(--deep-red);
-    color: var(--deep-red);
-    padding: 15px 30px;
+    border: none;
+    border-radius: 40px;
+    padding: 4px;
     margin: 26px 0 0 auto;
     z-index: 2;
+
+    img {
+      display: block;
+    }
 
     @include breakpoint-desktop {
       transition: background-color 0.3ms ease-in;
 
       &:hover {
-        background-color: var(--deep-red);
-        color: white;
+        background-color: var(--light-grey);
       }
     }
   }
