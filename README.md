@@ -1,14 +1,13 @@
 ## Getting Started
 
-First, run the development server:
+Run the following commands after cloning the project:
 
 ```bash
+npm i
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 ## Strategy
 
@@ -32,5 +31,6 @@ I managed to achieve what the goal set out but as always there are improvements 
 - More global, reusable styles. Some repetition was useed for the sake of time
 - Add more fonts to handle all scenarios
 - Configure the test imports properly
+- Unsure if the CORS issue could be solved but would be nice to avoid Next API
 
 
