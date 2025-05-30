@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Strategy
 
-## Learn More
+Throughout this exercise I made particular decisions on code/UI/config/performance which can be summarised below
 
-To learn more about Next.js, take a look at the following resources:
+- Firstly I added SCSS to allow for more advanced CSS scaling
+- Added a font using Next's local font import. Unfortunately I only imported one due to not wanting to spend time picking the correct ones from the vast options available
+- Added global styles and CSS variables and mixins to allow for easier adoption throughout components (breakpoint mixins and colours)
+- Installed jest for testing but had to import one package to every test file as was unable to manage inside Next config
+- Created localStorage helper and QuizContext to allow for values to be consumed by all child components rather than prop drilling
+- Due to CORS issues with the provided endpoint I used Next's API functionality and hosted the response there to call instead
+- Upon realised the images for question 1 was HTML in a string I installed a HTML parser to be able to render those properly
+- I used https://tinyjpg.com/ to compress JPG files for better perfomance on page loads
+- Mobile first design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Improvements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I managed to achieve what the goal set out but as always there are improvements I would have made given the time:
 
-## Deploy on Vercel
+- Better test coverage, I only added tests for a few components, need to add more
+- More global, reusable styles. Some repetition was useed for the sake of time
+- Add more fonts to handle all scenarios
+- Configure the test imports properly
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
